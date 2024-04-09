@@ -1,2 +1,2 @@
 # Tokio School
-Fichero README.md
+Repositorio para las prácticas del curso de Blockchain de Tokio School
