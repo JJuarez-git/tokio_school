@@ -38,12 +38,18 @@ Con este contrato cumpliríamos:
 
 Para desplegar y usar el contrato nos vamos a la pestaña de **Deploy & run transactions** de Remix. Elegimos el entorno, una billetera con la que pagar el despliegue y el contrato que vamos a desplegar.  
 
-![](./img/deploy.PNG)
+![](./img/deploy.png)
 
 Le damos al botón de **Deploy** y esperamos a que se despliegue el contrato.
 
-![](./img/contract_deployed.PNG)
+![](./img/contract_deployed.png)
 
 Con el contrato desplegado podremos empezar a interactuar con él. Si nos fijamos tendremos dos botones para interactuar. Corresponden a las dos funciones **writeMessage y getAllMessages**.  
 
 En la parte de writeMessage tenemos que introducir dos parámetros separados por comas. Los ponemos y ejecutamos.
+
+![](./img/write_message.png)
+
+Finalmente comprobaremos que realmente se ha guardado el mensaje en la variable messages. El objeto que se guarde en el array se guardará con la dirección del usuario, el nombre del usuario y el mensaje en sí.  
+
+![](./img/get_all_messages.png)
