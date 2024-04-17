@@ -1,8 +1,9 @@
-// José Carlos Juárez Calvo M4_T4_P1
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.12 <0.9.0;
+pragma solidity >=0.4.22 <0.9.0;
 
 contract SocialNetwork {
+    constructor() { }
+    
     struct Message {
         address sender;
         string name;
@@ -11,11 +12,9 @@ contract SocialNetwork {
 
     Message[] messages;
 
+
     function writeMessage(string memory name, string memory mes) public {
-        require(
-            bytes(mes).length <= 300,
-            "Message exceeds maximum length"
-        );
+        require(bytes(mes).length <= 300, "Message exceeds maximum length");
         messages.push(Message(msg.sender, name, mes));
     }
 

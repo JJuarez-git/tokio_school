@@ -1,32 +1,29 @@
-const { Web3 } = require('web3');
-const { abi, bytecode } = require('./compile');
+const {Web3} = require("web3");
 
-// const web3 = new Web3('https://ethereum-rpc.publicnode.com');
-const web3 = new Web3('https://sepolia.era.zksync.dev');
-// const web3 = new Web3('http://127.0.0.1:7545');
+const web3 = new Web3("http://127.0.0.1:7545");
 
-(async () => {
+const SocialNetwork = require("./build/contracts/SocialNetwork.json");
+const contractAddress = "0xe73DC397b857046B25366bA1CF4EbE271fafFAAB";
+
+const instance = new web3.eth.Contract(
+    SocialNetwork.abi,
+    contractAddress
+  );
+
+const main = async () => {
     try {
-
-        // const contract = new web3.eth.Contract(abi);
-
         const accounts = await web3.eth.getAccounts();
-        console.log(accounts);
-        const defaultAccount = accounts[0];
-        console.log('deployer account:', defaultAccount);
-
-        /* const deployer = contract.deploy({
-            data: '0x' + bytecode,
-            arguments: [],
-        });
-
-        const gas = await deployer.estimateGas({
-            from: defaultAccount,
-        });
-        console.log('estimated gas:', gas); */
-
-
+        /* const result = await instance.methods.writeMessage('Jose', 'Esto es un mensaje').send({ 
+            from: accounts[0],
+            gas: '1000000'
+        }); */
+        const result = await instance.methods.getAllMessages().call({ from: accounts[0] });
+        
+        console.log(result);
+        
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
-})();
+}
+
+main();
