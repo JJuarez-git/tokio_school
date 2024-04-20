@@ -1,4 +1,4 @@
-## Práctica M4_T4_P1
+# Práctica M4_T4_P1
 Para esta práctica de una red social descentralizada he creado un Smart Contract (M4_T4_P1.sol) que contiene lo siguiente:  
 
 El contrato lo he llamado Social Network y tiene dos funciones.
