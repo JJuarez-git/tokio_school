@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const web3 = new Web3("http://127.0.0.1:7545");
 
 const SocialNetwork = require("./build/contracts/SocialNetwork.json");
-const contractAddress = "0x2908Dab6d01371076D033BA408f7Af270da8cA0A";
+const contractAddress = "0xC80B9B2CD9fbCC3f60D1F6E07477E7B2178F027f";
 
 const instance = new web3.eth.Contract(
     SocialNetwork.abi,
