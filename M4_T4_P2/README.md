@@ -1,12 +1,12 @@
 # Práctica M4_T4_P2
-Para esta práctica entrarán en juego diferentes partes. La aplicación tendrás tecnologías como Ganache, Truffle, Node.js, Angular y se dividirá en tres elementos: 
+Para esta práctica entrarán en juego diferentes partes. La aplicación tendrá tecnologías como Ganache, Truffle, Node.js, Angular y se dividirá en tres elementos: 
 <ul>
   <li>Una red blockchain en local</li>
   <li>Un backend que hará de servidor / API</li>
   <li>Un frontend desde el que lanzar las consultas</li>
 </ul>  
 
-### Índice
+## Índice
 <ul>
   <li>
     <a href="#ganache">Ganache</a>
@@ -80,11 +80,17 @@ Y lo iniciamos.
 
 La API tendrá tres endpoints para interactuar con la blockchain de Ganache:
  - **GET /accounts** (Devuelve las direcciones de las billeteras existentes en la red de Ganache)
- - **GET /messages** (Devuelve todos los mensajes guardados en el Smart Contract)
- - **POST /message** (Escribe un nuevo mensaje en el Smart Contract)
+ - **GET /messages** (Devuelve todos los mensajes guardados en el Smart Contract, *getAllMessages*)
+ - **POST /message** (Escribe un nuevo mensaje en el Smart Contract, *writeMessage*)
 
 ### Comandos Truffle
-Para poder interactuar con el contrato que hicimos en la anterior práctica primero tendremos que compilarlo y después desplegarlo, pero antes necesitamos copiarlo en la carpeta */contracts* como **SocialNetwork.sol**.  
+Para poder interactuar con el contrato que hicimos en la anterior práctica primero tendremos que compilarlo y después desplegarlo, pero primero necesitamos enlazar el proyecto de Truffle dentro de Ganache.  
+
+<div align="center">
+  <img src="./img/ganache_truffle.png">
+</div>
+
+Y después copiar el contrato en la carpeta */contracts* como **SocialNetwork.sol**.  
 El contrato es exactamente el mismo que el de la práctica anterior. Una vez lo tengamos copiado en la carpeta pasaremos a **compilarlo**.
 
 Compilar contrato (desde la carpeta raíz de backend):
@@ -116,7 +122,9 @@ Con todo configurado ya podremos hacer un despliegue del contracto.
 
     truffle migrate
 
-Fotos de Ganache contrato desplegado
+<div align="center">
+  <img src="./img/deployed.png">
+</div>
 
 ### Conexión con el contrato
 Con el contrato ya desplegado lo siguiente será conectarse a él para poder interactuar con sus funciones. Dentro de *index.js* añadimos el siguiente código:
@@ -125,7 +133,7 @@ Con el contrato ya desplegado lo siguiente será conectarse a él para poder int
     const web3 = new Web3("http://127.0.0.1:7545"); // URL RPC Server
 
     const SocialNetwork = require("./build/contracts/SocialNetwork.json");
-    const contractAddress = "<direccion de contrato>"; // Dirección contrato
+    const contractAddress = "0xC80B9B2CD9fbCC3f60D1F6E07477E7B2178F027f"; // Dirección contrato
 
     const instance = new web3.eth.Contract(
         SocialNetwork.abi,
@@ -135,3 +143,20 @@ Con el contrato ya desplegado lo siguiente será conectarse a él para poder int
 Y arrancamos el backend: `npm start`.
 
 ## Front End
+Para la parte del Front he realizado una pequeña aplicación en Angular que consiste en un formulario y un listado de los mensajes que vayamos generando. Rellenamos el formulario para crear un mensaje en el Smart Contract y lo enviamos. Este formulario envía una petición a la API (POST /message) y genera el mensaje.
+
+<div align="center">
+  <img src="./img/form.png">
+</div>
+
+Si volvemos a Ganache podremos fijarnos que se ha generado una nueva transacción con la dirección (billetera) que hemos seleccionado.
+
+<div align="center">
+  <img src="./img/tx.png">
+</div>
+
+En el Front nos aparecerá el mensaje y el hash de la transacción.
+
+<div align="center">
+  <img src="./img/message.png">
+</div>
