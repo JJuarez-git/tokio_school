@@ -1,0 +1,10 @@
+<div class="h-screen flex justify-center">
+  <div class="border-x border-neutral-300 w-96">
+    <app-card (onSubmit)="onSubmit()"></app-card>
+  </div>
+  <div class="border-r border-neutral-300 w-96 p-4 space-y-4 h-screen overflow-y-scroll">
+    @for (mes of messages; track $index) {
+        <app-message [name]="mes.name" [message]="mes.content" [sender]="mes.sender"></app-message>
+    }
+  </div>
+</div>
