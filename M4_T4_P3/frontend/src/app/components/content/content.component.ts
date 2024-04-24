@@ -12,16 +12,19 @@ import { MessageComponent } from '../message/message.component';
 })
 export class ContentComponent implements OnInit {
 
-  messages: any[] = []
+  messages: any[] = [];
+  count: number = 0;
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.getMessages();
+    this.getCount();
   }
-
+  
   onSubmit() {
     this.getMessages();
+    this.getCount();
   }
 
   getMessages() {
@@ -30,4 +33,9 @@ export class ContentComponent implements OnInit {
     })
   }
 
+  getCount() {
+    this.api.getCount().subscribe({
+      next: ({ count }) => this.count = count
+    })
+  }
 }
