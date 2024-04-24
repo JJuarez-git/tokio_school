@@ -21,4 +21,8 @@ export class ApiService {
   postMessage(body: any) {
     return this.http.post<any>(this.API_URL + '/message', body);
   }
+
+  getCount() {
+    return this.http.get<{ count: number }>(this.API_URL + '/counter');
+  }
 }
