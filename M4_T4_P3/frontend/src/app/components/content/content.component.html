@@ -3,6 +3,13 @@
     <app-card (onSubmit)="onSubmit()"></app-card>
   </div>
   <div class="border-r border-neutral-300 w-96 p-4 space-y-4 h-screen overflow-y-scroll">
+    <div class="block items-center px-5 py-2.5 mb-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg">
+      Messages
+      <span
+        class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+        {{count}}
+      </span>
+    </div>
     @for (mes of messages; track $index) {
         <app-message [name]="mes.name" [message]="mes.content" [sender]="mes.sender"></app-message>
     }
