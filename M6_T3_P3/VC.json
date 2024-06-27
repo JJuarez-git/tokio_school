@@ -3,34 +3,26 @@
         "https://www.w3.org/2018/credentials/v1",
         "https://www.w3.org/2018/credentials/examples/v1"
     ],
-    "id": "http://example.edu/credentials/1872",
+    "id": "https://policia.es/credentials/1872",
     "type": [
         "VerifiableCredential",
-        "AlumniCredential"
+        "Citizenship"
     ],
-    "issuer": "https://example.edu/issuers/565049",
-    "issuanceDate": "2010-01-01T19:23:24Z",
+    "issuer": "https://policia.es/issuers/565049",
+    "issuanceDate": "2024-02-10T19:23:24Z",
     "credentialSubject": {
-        "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
-        "alumniOf": {
-            "id": "did:example:c276e12ec21ebfeb1f712ebc6f1",
-            "name": [
-                {
-                    "value": "Example University",
-                    "lang": "en"
-                },
-                {
-                    "value": "Exemple d'Université",
-                    "lang": "fr"
-                }
-            ]
-        }
+        "id": "did:example:123456789abcdefghi",
+        "name": "Pepito",
+        "surname": "Pérez",
+        "dateOfBirth": "1990-01-01",
+        "document": "123456789V",
+        "expiration": "2029-02-10"
     },
     "proof": {
         "type": "RsaSignature2018",
-        "created": "2017-06-18T21:19:10Z",
+        "created": "2024-02-10T19:23:24Z",
         "proofPurpose": "assertionMethod",
-        "verificationMethod": "https://example.edu/issuers/565049#key-1",
+        "verificationMethod": "https://policia.es/issuers/565049#key-1",
         "jws": "eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM"
     }
 }
