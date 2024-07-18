@@ -1,10 +1,15 @@
-const { Web3 } = require("web3");
+const Web3 = require("web3");
+const Web3Quorum = require("web3js-quorum");
+const web3 = new Web3Quorum(new Web3("http://localhost:8545"));
 
-const web3 = new Web3("http://localhost:8545");
+const wallet = web3.eth.accounts.wallet.create(1);
+console.log(wallet);
 
-web3.eth.getAccounts().then(console.log)
-// web3.eth.getBlock().then(console.log)
-web3.eth.getBlock(160).then(console.log)
-web3.eth.getChainId().then(console.log)
-web3.eth.getGasPrice().then(console.log)
-console.log("default account", web3.eth.defaultAccount);
+// console.log(web3.eth.accounts.wallet);
+
+// const account = web3.eth.accounts.create();
+
+// web3.eth.accounts.wallet.add(account);
+
+web3.eth.getAccounts().then(console.log);
+// web3.eth.getBlock(1).then(console.log);
