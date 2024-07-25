@@ -1,0 +1,29 @@
+
+genesis-file="/config/genesis.json"
+node-private-key-file="/opt/besu/keys/nodekey"
+logging="INFO"
+data-path="/opt/besu/data"
+host-allowlist=["*"]
+min-gas-price=0
+
+# rpc
+rpc-http-enabled=true
+rpc-http-host="0.0.0.0"
+rpc-http-port=8545
+rpc-http-cors-origins=["*"]
+rpc-http-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM","QBFT"]
+rpc-ws-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM","QBFT"]
+
+# ws
+rpc-ws-enabled=true
+rpc-ws-host="0.0.0.0"
+rpc-ws-port=8546
+
+# bootnodes
+bootnodes=["enode://5e25da982b1c50c6061cb6bc4f58691596e4c5e6519ac10ee8f8507658ed81e2f0267b78b11d3b8d1e4cad2d6f12f4d7d8c8b02e7941b07f40f34c7c5222f8f5@172.16.239.11:30303"]
+
+
+# Discovery at boot is set to a list of static files, but will also discover new nodes should they be added
+# static nodes
+static-nodes-file="/config/static-nodes.json"
+discovery-enabled=true

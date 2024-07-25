@@ -1,0 +1,60 @@
+
+services:
+
+  rpc-node:
+    container_name: rpc-node
+    image: hyperledger/besu:24.7.0
+    ports:
+      - 8545:8545/tcp
+      - 8546:8546/tcp
+    volumes:
+      - ./config/besu/:/config
+      - ./config/keys/rpc-node:/opt/besu/keys
+      - ./logs/:/tmp/besu
+    networks:
+      besu:
+        ipv4_address: 172.16.239.10
+    entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.10
+
+
+  validator1:
+    container_name: validator-1
+    image: hyperledger/besu:24.7.0
+    ports:
+      - 21001:8545/tcp
+      - 30303
+      - 9545
+    volumes:
+      - ./config/besu/:/config
+      - ./config/keys/validator1:/opt/besu/keys
+      - ./logs/:/tmp/besu
+    networks:
+      besu:
+        ipv4_address: 172.16.239.11
+    entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.11
+
+
+  validator2:
+    container_name: validator-2
+    image: hyperledger/besu:24.7.0
+    ports:
+      - 21002:8545/tcp
+      - 30303
+      - 9545
+    volumes:
+      - ./config/besu/:/config
+      - ./config/keys/validator2:/opt/besu/keys
+    networks:
+      besu:
+        ipv4_address: 172.16.239.12
+    entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.12
+
+
+
+networks:
+  besu:
+    name: besu
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.239.0/24
