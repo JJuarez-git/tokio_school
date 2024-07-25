@@ -44,10 +44,45 @@ services:
     volumes:
       - ./config/besu/:/config
       - ./config/keys/validator2:/opt/besu/keys
+      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.12
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.12
+
+
+  member1:
+    container_name: member-1
+    image: hyperledger/besu:24.7.0
+    ports:
+      - 20001:8545/tcp
+      - 30303
+      - 9545
+    volumes:
+      - ./config/besu/:/config
+      - ./config/keys/member1:/opt/besu/keys
+      - ./logs/:/tmp/besu
+    networks:
+      besu:
+        ipv4_address: 172.16.239.13
+    entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.13
+
+
+  member2:
+    container_name: member-2
+    image: hyperledger/besu:24.7.0
+    ports:
+      - 20002:8545/tcp
+      - 30303
+      - 9545
+    volumes:
+      - ./config/besu/:/config
+      - ./config/keys/member2:/opt/besu/keys
+      - ./logs/:/tmp/besu
+    networks:
+      besu:
+        ipv4_address: 172.16.239.14
+    entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.14
 
 
 

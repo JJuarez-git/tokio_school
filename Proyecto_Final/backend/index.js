@@ -1,18 +1,17 @@
 const { Web3 } = require("web3");
 
-const web3 = new Web3("http://localhost:8545");
+(async () => {
+    const web3 = new Web3("http://127.0.0.1:8545");
+    
+    try {
+        // const block = await web3.eth.getBlock();
+        // console.log("Block", block);
 
+        const accounts = await web3.eth.getAccounts();
+        console.log(accounts);
 
-web3.eth.getNodeInfo().then(console.log).catch(console.error);
+    } catch (error) {
+        console.error(error)   
+    }
+})();
 
-/* const wallet = web3.eth.accounts.wallet.create(1);
-console.log(wallet); */
-
-// console.log(web3.eth.accounts.wallet);
-
-// const account = web3.eth.accounts.create();
-
-// web3.eth.accounts.wallet.add(account);
-
-// web3.eth.getAccounts().then(console.log);
-// web3.eth.getBlock().then(console.log);
