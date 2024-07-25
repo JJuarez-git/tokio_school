@@ -7,7 +7,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 1337
     },
-    quickstart: {
+    besu: {
       url: "http://127.0.0.1:8545",
       chainId: 1337,
       accounts: [
