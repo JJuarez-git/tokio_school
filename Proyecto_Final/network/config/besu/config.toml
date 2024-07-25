@@ -11,8 +11,8 @@ rpc-http-enabled=true
 rpc-http-host="0.0.0.0"
 rpc-http-port=8545
 rpc-http-cors-origins=["*"]
-rpc-http-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM","QBFT"]
-rpc-ws-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","PRIV","PERM","QBFT"]
+rpc-http-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","QBFT"]
+rpc-ws-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","QBFT"]
 
 # ws
 rpc-ws-enabled=true
