@@ -85,6 +85,31 @@ services:
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.14
 
 
+  eth-signer:
+    container_name: eth-signer
+    image: consensys/ethsigner:23.6
+    depends_on:
+      - rpc-node
+    ports:
+    - 8545
+    volumes:
+      - ./config/keys/eth-signer/accountKeystore:/opt/eth-signer/key
+      - ./config/keys/eth-signer/accountPassword:/opt/eth-signer/password
+    command: [
+      "--chain-id=1337",
+      "--http-listen-host=0.0.0.0",
+      "--downstream-http-port=8545",
+      "--downstream-http-host=rpcnode",
+      "file-based-signer",
+      "-k",
+      "/opt/eth-signer/key",
+      "-p",
+      "/opt/eth-signer/password"
+    ]
+    networks:
+      besu:
+        ipv4_address: 172.16.239.20
+
 
 networks:
   besu:
