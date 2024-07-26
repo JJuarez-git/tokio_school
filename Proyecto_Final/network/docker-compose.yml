@@ -93,18 +93,18 @@ services:
     ports:
     - 8545
     volumes:
-      - ./config/keys/eth-signer/accountKeystore:/opt/eth-signer/key
-      - ./config/keys/eth-signer/accountPassword:/opt/eth-signer/password
+      - ./config/keys/eth-signer/accountKeystore:/opt/ethsigner/key
+      - ./config/keys/eth-signer/accountPassword:/opt/ethsigner/password
     command: [
       "--chain-id=1337",
       "--http-listen-host=0.0.0.0",
       "--downstream-http-port=8545",
-      "--downstream-http-host=rpcnode",
+      "--downstream-http-host=rpc-node",
       "file-based-signer",
       "-k",
-      "/opt/eth-signer/key",
+      "/opt/ethsigner/key",
       "-p",
-      "/opt/eth-signer/password"
+      "/opt/ethsigner/password"
     ]
     networks:
       besu:
