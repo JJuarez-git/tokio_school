@@ -14,6 +14,10 @@ contract Academy {
         return courses;
     }
 
+    function getStudents() public view returns (string[] memory) {
+        return students;
+    }
+
     function setStudentCourse(CourseType _course, string memory _studentName) public {
         academy[_course].push(_studentName);
         students.push(_studentName);
