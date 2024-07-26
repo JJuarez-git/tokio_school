@@ -9,7 +9,7 @@ const port = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const web3 = new Web3("http://127.0.0.1:8545");
+const web3 = new Web3(CONFIG.RPC_NODE);
 
 const AcademyJSON = require("../artifacts/contracts/Academy.sol/Academy.json");
 const deployedAddresses = require(`../ignition/deployments/chain-${CONFIG.CHAIN_ID}/deployed_addresses.json`);
