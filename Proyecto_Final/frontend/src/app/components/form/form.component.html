@@ -1,0 +1,33 @@
+<div
+    class="w-25r max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Inscripción</h5>
+    </div>
+    <div class="flow-root">
+        <form class="max-w-sm mx-auto space-y-4">
+
+            <div>
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                    un curso</label>
+                <select id="countries"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Curso</option>
+                    @for (c of courses; track c) {
+                    <option [value]="c">{{c}}</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label for="first_name"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                <input type="text" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="John" required />
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
