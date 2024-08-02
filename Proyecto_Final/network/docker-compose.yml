@@ -54,6 +54,9 @@ services:
   member1:
     container_name: member-1
     image: hyperledger/besu:24.7.0
+    environment:
+      - BESU_DATA_STORAGE_FORMAT=FOREST
+      - BESU_SYNC_MODE=FULL
     ports:
       - 20001:8545/tcp
       - 30303
@@ -66,7 +69,7 @@ services:
       besu:
         ipv4_address: 172.16.239.13
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.13
-
+ 
 
   member2:
     container_name: member-2
@@ -83,32 +86,22 @@ services:
       besu:
         ipv4_address: 172.16.239.14
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.14
+      
 
-
-  eth-signer:
-    container_name: eth-signer
-    image: consensys/ethsigner:23.6
+  web3-signer:
+    container_name: web3-signer
+    image: consensys/web3signer:24.6
     depends_on:
       - rpc-node
-    ports:
-    - 8545
     volumes:
-      - ./config/keys/eth-signer/accountKeystore:/opt/ethsigner/key
-      - ./config/keys/eth-signer/accountPassword:/opt/ethsigner/password
-    command: [
-      "--chain-id=1337",
-      "--http-listen-host=0.0.0.0",
-      "--downstream-http-port=8545",
-      "--downstream-http-host=rpc-node",
-      "file-based-signer",
-      "-k",
-      "/opt/ethsigner/key",
-      "-p",
-      "/opt/ethsigner/password"
-    ]
+      - ./config/signer/:/config
+    ports:
+      - "9000:9000"
+      - "9001:9001"
     networks:
       besu:
-        ipv4_address: 172.16.239.20
+        ipv4_address: 172.16.239.21
+    command: ["--config-file=/config/config.yaml", "eth2"]
 
 
 networks:
