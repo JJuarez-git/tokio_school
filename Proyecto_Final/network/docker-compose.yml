@@ -4,6 +4,8 @@ services:
   rpc-node:
     container_name: rpc-node
     image: hyperledger/besu:24.7.0
+    environment:
+      - BESU_RPC_TX_FEECAP=0
     ports:
       - 8545:8545/tcp
       - 8546:8546/tcp

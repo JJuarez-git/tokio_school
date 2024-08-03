@@ -1,5 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import { CONFIG } from './src/config';
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
@@ -8,8 +9,15 @@ const config: HardhatUserConfig = {
       chainId: 1337
     },
     besu: {
-      url: "http://127.0.0.1:8545",
-      chainId: 1337
+      url: CONFIG.RPC_NODE,
+      chainId: CONFIG.CHAIN_ID,
+      accounts: {
+        mnemonic: CONFIG.MNEMONIC,
+        path: "m/44'/60'/0'/0",
+        initialIndex: 0,
+        count: 1,
+        passphrase: "",
+      },
     }
   },
   paths: {

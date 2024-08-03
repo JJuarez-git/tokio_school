@@ -10,6 +10,7 @@ metrics-host-allowlist: "*"
 
 key-store-path: /config/keys
 
+eth1.chain-id: "1337"
 # eth2 subcommand options
 # eth2.network: file:///var/config/e2e_config.yaml
 eth2.slashing-protection-enabled: false

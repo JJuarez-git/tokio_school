@@ -1,8 +1,9 @@
-import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
+import cors from "cors";
+import express from "express";
 import { Web3 } from "web3";
 import { CONFIG } from "./config";
+import provider from "./provider";
 
 const app = express();
 const port = 4000;
@@ -39,7 +40,7 @@ app.post('/course/student', async (req, res) => {
     try {
         const { sender, course, student } = req.body;
         const response = await AcademyContract.methods.setStudentCourse(Number(course), student).send({
-            from: sender,
+            from: provider.getAddress(0),
             gas: '1000000'
         });
         res.status(200).json({ tx: response.transactionHash });
