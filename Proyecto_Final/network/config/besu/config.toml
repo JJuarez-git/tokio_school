@@ -14,6 +14,13 @@ rpc-http-cors-origins=["*"]
 rpc-http-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","QBFT"]
 rpc-ws-api=["EEA","WEB3","ETH","NET","TRACE","DEBUG","ADMIN","TXPOOL","QBFT"]
 
+# rpc tls settings
+# rpc-http-tls-enabled=true
+# rpc-http-tls-client-auth-enabled=true
+# rpc-http-tls-keystore-file="/config/tls/keystore.p12"
+# rpc-http-tls-keystore-password-file="/config/tls/password.txt"
+# rpc-http-tls-known-clients-file="/config/tls/knownClients.txt"
+
 # ws
 rpc-ws-enabled=true
 rpc-ws-host="0.0.0.0"

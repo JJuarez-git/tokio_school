@@ -11,6 +11,7 @@ services:
       - 8546:8546/tcp
     volumes:
       - ./config/besu/:/config
+      - ./config/tls/:/config/tls
       - ./config/keys/rpc-node:/opt/besu/keys
       - ./logs/:/tmp/besu
     networks:
@@ -28,6 +29,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
+      - ./config/tls/:/config/tls
       - ./config/keys/validator1:/opt/besu/keys
       - ./logs/:/tmp/besu
     networks:
@@ -45,6 +47,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
+      - ./config/tls/:/config/tls
       - ./config/keys/validator2:/opt/besu/keys
       - ./logs/:/tmp/besu
     networks:
@@ -65,6 +68,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
+      - ./config/tls/:/config/tls
       - ./config/keys/member1:/opt/besu/keys
       - ./logs/:/tmp/besu
     networks:
@@ -82,6 +86,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
+      - ./config/tls/:/config/tls
       - ./config/keys/member2:/opt/besu/keys
       - ./logs/:/tmp/besu
     networks:
@@ -97,9 +102,10 @@ services:
       - rpc-node
     volumes:
       - ./config/signer/:/config
+      - ./config/tls/:/config/tls
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "9000:9000/tcp"
+      - "9001:9001/tcp"
     networks:
       besu:
         ipv4_address: 172.16.239.21

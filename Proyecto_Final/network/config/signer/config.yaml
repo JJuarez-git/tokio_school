@@ -14,3 +14,7 @@ eth1.chain-id: "1337"
 # eth2 subcommand options
 # eth2.network: file:///var/config/e2e_config.yaml
 eth2.slashing-protection-enabled: false
+
+# tls-keystore-file: /config/tls/keystore.p12
+# tls-keystore-password-file: /config/tls/password.txt
+# tls-known-clients-file: /config/tls/knownClients.txt
