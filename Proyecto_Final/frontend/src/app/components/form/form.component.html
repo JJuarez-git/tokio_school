@@ -4,16 +4,15 @@
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Inscripción</h5>
     </div>
     <div class="flow-root">
-        <form class="max-w-sm mx-auto space-y-4">
+        <div class="max-w-sm mx-auto space-y-4">
 
             <div>
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
                     un curso</label>
-                <select id="countries"
+                <select id="countries" [(ngModel)]="select"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Curso</option>
-                    @for (c of courses; track c) {
-                    <option [value]="c">{{c}}</option>
+                    @for (c of courses; track c; let i = $index) {
+                    <option [value]="i">{{c}}</option>
                     }
                 </select>
             </div>
@@ -21,15 +20,14 @@
             <div>
                 <label for="first_name"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                <input type="text" id="first_name"
+                <input type="text" id="first_name" [(ngModel)]="student"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Escribe tu nombre" required />
             </div>
 
-
-            <button type="button"
+            <button type="button" (click)="send(student, select)"
                 class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Enviar</button>
 
-        </form>
+        </div>
     </div>
 </div>
