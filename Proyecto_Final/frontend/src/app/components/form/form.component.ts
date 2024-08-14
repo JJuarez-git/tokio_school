@@ -14,6 +14,8 @@ export class FormComponent implements OnInit {
   courses: string[] = [];
   select: string = '';
   student: string = '';
+  loading: boolean = false;
+  response: boolean = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -25,9 +27,18 @@ export class FormComponent implements OnInit {
   }
 
   send(student: string, course: string) {
+    this.loading = true;
+    this.response = false;
     this.apiService.setStudentCourse(student, Number(course)).subscribe({
-      next: (data) => { },
-      error: (err) => console.error(err)
+      next: (data) => {
+        this.loading = false;
+        this.response = true;
+      },
+      error: (err) => {
+        this.loading = false;
+        this.response = false;
+        console.error(err);
+      }
     })
   }
 
