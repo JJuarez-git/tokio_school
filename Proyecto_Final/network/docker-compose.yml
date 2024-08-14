@@ -11,9 +11,7 @@ services:
       - 8546:8546/tcp
     volumes:
       - ./config/besu/:/config
-      - ./config/tls/:/config/tls
       - ./config/keys/rpc-node:/opt/besu/keys
-      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.10
@@ -29,9 +27,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
-      - ./config/tls/:/config/tls
       - ./config/keys/validator1:/opt/besu/keys
-      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.11
@@ -47,9 +43,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
-      - ./config/tls/:/config/tls
       - ./config/keys/validator2:/opt/besu/keys
-      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.12
@@ -68,9 +62,7 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
-      - ./config/tls/:/config/tls
       - ./config/keys/member1:/opt/besu/keys
-      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.13
@@ -86,30 +78,11 @@ services:
       - 9545
     volumes:
       - ./config/besu/:/config
-      - ./config/tls/:/config/tls
       - ./config/keys/member2:/opt/besu/keys
-      - ./logs/:/tmp/besu
     networks:
       besu:
         ipv4_address: 172.16.239.14
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.14
-      
-
-  web3-signer:
-    container_name: web3-signer
-    image: consensys/web3signer:24.6
-    depends_on:
-      - rpc-node
-    volumes:
-      - ./config/signer/:/config
-      - ./config/tls/:/config/tls
-    ports:
-      - "9000:9000/tcp"
-      - "9001:9001/tcp"
-    networks:
-      besu:
-        ipv4_address: 172.16.239.21
-    command: ["--config-file=/config/config.yaml", "eth2"]
 
 
 networks:
