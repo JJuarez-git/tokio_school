@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
 export class FormComponent implements OnInit {
 
-  courses: string[] = [];
-  select: string = '';
-  student: string = '';
+  @Input() courses: string[] = [];
+  @Input() students: string[] = [];
+
+  form = new FormGroup({
+    course: new FormControl(''),
+    student: new FormControl('')
+  });
+
   loading: boolean = false;
   response: boolean = false;
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit(): void {
-    this.apiService.getCourses().subscribe({
-      next: (data) => this.courses = data,
-      error: (err) => console.error(err)
-    })
-  }
+  ngOnInit(): void { }
 
   send(student: string, course: string) {
     this.loading = true;
