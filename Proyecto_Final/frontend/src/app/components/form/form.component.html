@@ -25,7 +25,7 @@
                     placeholder="Escribe tu nombre" required />
             </div>
 
-            <button type="button" (click)="send(student, select)" [disabled]="!form.valid"
+            <button type="button" (click)="handleClick()" [disabled]="!form.valid"
                 class="disabled:bg-neutral-300 flex items-center justify-center w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
 
                 @if (loading) {
@@ -59,7 +59,7 @@
                     <span class="sr-only">Fire icon</span>
                 </div>
                 <div class="ms-3 text-sm font-normal">¡Alumno inscrito!</div>
-                <button type="button"
+                <button type="button" (click)="response = false"
                     class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                     data-dismiss-target="#toast-default" aria-label="Close">
                     <span class="sr-only">Close</span>

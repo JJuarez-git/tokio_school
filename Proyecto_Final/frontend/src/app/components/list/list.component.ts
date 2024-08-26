@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 
@@ -10,17 +10,23 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent {
+export class ListComponent implements OnChanges {
 
   @Input() courses: string[] = [];
   @Input() students: string[] = [];
+  onRadioAll = output();
   
   radio: string = 'all';
   select: string = '';
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit(): void { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (this.radio === 'course' && this.select && changes['students']) {
+      this.handleSelect(this.select);
+    }
+  }
 
   avatarURL(name: string) {
     return `https://api.multiavatar.com/${name}.svg`;
@@ -32,5 +38,16 @@ export class ListComponent {
       error: (err) => console.error(err)
     });
   }
+
+  handleRadioAll() {
+    this.select = '';
+    this.onRadioAll.emit();
+  }
+
+  handleRadioCourse() {
+    this.students = [];
+  }
+
+
 
 }

@@ -21,15 +21,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     initFlowbite();
+    this.getCourses();
+    this.getStudents();
+  }
 
+  getCourses() {
     this.apiService.getCourses().subscribe({
       next: (data) => this.courses = data,
       error: (err) => console.error(err)
     });
+  }
 
+  getStudents() {
     this.apiService.getStudents().subscribe({
       next: (data) => this.students = data,
       error: (err) => console.error(err)
-    })
+    });
   }
 }
