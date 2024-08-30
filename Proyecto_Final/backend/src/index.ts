@@ -3,7 +3,6 @@ import cors from "cors";
 import express from "express";
 import { Transaction, Web3 } from "web3";
 import { CONFIG } from "./config";
-import provider from "./provider";
 
 const app = express();
 const port = 4000;

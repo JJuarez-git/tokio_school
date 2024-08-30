@@ -10,8 +10,8 @@ services:
       - 8545:8545/tcp
       - 8546:8546/tcp
     volumes:
-      - ./config/besu/:/config
-      - ./config/keys/rpc-node:/opt/besu/keys
+      - ./network/config/besu/:/config
+      - ./network/config/keys/rpc-node:/opt/besu/keys
     networks:
       besu:
         ipv4_address: 172.16.239.10
@@ -19,6 +19,8 @@ services:
 
 
   validator1:
+    depends_on:
+      - rpc-node
     container_name: validator-1
     image: hyperledger/besu:24.7.0
     ports:
@@ -26,8 +28,8 @@ services:
       - 30303
       - 9545
     volumes:
-      - ./config/besu/:/config
-      - ./config/keys/validator1:/opt/besu/keys
+      - ./network/config/besu/:/config
+      - ./network/config/keys/validator1:/opt/besu/keys
     networks:
       besu:
         ipv4_address: 172.16.239.11
@@ -35,6 +37,8 @@ services:
 
 
   validator2:
+    depends_on:
+      - validator1
     container_name: validator-2
     image: hyperledger/besu:24.7.0
     ports:
@@ -42,8 +46,8 @@ services:
       - 30303
       - 9545
     volumes:
-      - ./config/besu/:/config
-      - ./config/keys/validator2:/opt/besu/keys
+      - ./network/config/besu/:/config
+      - ./network/config/keys/validator2:/opt/besu/keys
     networks:
       besu:
         ipv4_address: 172.16.239.12
@@ -61,8 +65,8 @@ services:
       - 30303
       - 9545
     volumes:
-      - ./config/besu/:/config
-      - ./config/keys/member1:/opt/besu/keys
+      - ./network/config/besu/:/config
+      - ./network/config/keys/member1:/opt/besu/keys
     networks:
       besu:
         ipv4_address: 172.16.239.13
@@ -77,12 +81,42 @@ services:
       - 30303
       - 9545
     volumes:
-      - ./config/besu/:/config
-      - ./config/keys/member2:/opt/besu/keys
+      - ./network/config/besu/:/config
+      - ./network/config/keys/member2:/opt/besu/keys
     networks:
       besu:
         ipv4_address: 172.16.239.14
     entrypoint: besu --config-file=/config/config.toml --p2p-host=172.16.239.14
+
+  
+  backend:
+    depends_on:
+      - validator2
+    container_name: backend
+    image: node:20.17-alpine3.19
+    ports:
+      - 4000:4000/tcp
+    env_file:
+      - path: ./backend/.env
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    networks:
+      besu:
+        ipv4_address: 172.16.239.20
+    entrypoint: sh ./scripts/deploy.sh
+
+
+  frontend:
+    depends_on:
+      - validator2
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - 80:80/tcp
+    networks:
+      besu:
+        ipv4_address: 172.16.239.30
 
 
 networks:
