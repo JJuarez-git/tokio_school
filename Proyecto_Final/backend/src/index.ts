@@ -1,7 +1,7 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import { Transaction, Web3 } from "web3";
+import { Contract, Transaction, Web3 } from "web3";
 import { CONFIG } from "./config";
 
 const app = express();
@@ -10,11 +10,17 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const web3 = new Web3(CONFIG.RPC_NODE);
+let AcademyJSON: any, deployedAddresses: any, AcademyContract: Contract<any>, signer: any; 
 
-const AcademyJSON = require("../artifacts/contracts/Academy.sol/Academy.json");
-const deployedAddresses = require(`../ignition/deployments/chain-${CONFIG.CHAIN_ID}/deployed_addresses.json`);
-const AcademyContract = new web3.eth.Contract(AcademyJSON.abi, deployedAddresses['AcademyModule#Academy']);
-const signer = web3.eth.accounts.privateKeyToAccount(CONFIG.SIGNER_PRIVATE_KEY);
+try {
+    AcademyJSON = require("../artifacts/contracts/Academy.sol/Academy.json");
+    deployedAddresses = require(`../ignition/deployments/chain-${CONFIG.CHAIN_ID}/deployed_addresses.json`);
+    AcademyContract = new web3.eth.Contract(AcademyJSON.abi, deployedAddresses['DeployModule#Academy']);
+    signer = web3.eth.accounts.privateKeyToAccount(CONFIG.SIGNER_PRIVATE_KEY);
+    
+} catch (error: any) {
+    console.error('ERROR:', error.message)
+}
 
 app.get('/courses', async (req, res) => {
     try {
@@ -42,7 +48,7 @@ app.post('/course/student', async (req, res) => {
         const txData = AcademyContract.methods.setStudentCourse(Number(course), student).encodeABI();
         const tx: Transaction = {
             from: signer.address,
-            to: deployedAddresses['AcademyModule#Academy'],
+            to: deployedAddresses['DeployModule#Academy'],
             gas: 1000000,
             gasPrice: 0,
             data: txData
